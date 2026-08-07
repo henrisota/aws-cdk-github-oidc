@@ -2,6 +2,7 @@ import { AlmaCdkConstructLibrary } from "@alma-cdk/construct-library";
 import { cdk, github, YamlFile } from "projen";
 
 const MAJOR_VERSION = 4;
+const NEXT_MAJOR_VERSION = MAJOR_VERSION + 1;
 
 const project = new AlmaCdkConstructLibrary({
   name: "aws-cdk-github-oidc",
@@ -30,6 +31,10 @@ const project = new AlmaCdkConstructLibrary({
       majorVersion: 3,
       environment: "production",
       npmDistTag: "legacy-v3",
+    },
+    [`${NEXT_MAJOR_VERSION}.x`]: {
+      majorVersion: NEXT_MAJOR_VERSION,
+      prerelease: "beta",
     },
   },
   pnpmSettings: {
