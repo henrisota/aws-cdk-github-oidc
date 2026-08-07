@@ -1,6 +1,8 @@
 import { AlmaCdkConstructLibrary } from "@alma-cdk/construct-library";
 import { cdk, github, YamlFile } from "projen";
 
+const MAJOR_VERSION = 4;
+
 const project = new AlmaCdkConstructLibrary({
   name: "aws-cdk-github-oidc",
   author: "Ari Palo",
@@ -21,7 +23,7 @@ const project = new AlmaCdkConstructLibrary({
     "openid-connect",
   ],
   stability: cdk.Stability.EXPERIMENTAL, // or STABLE or DEPRECATED
-  majorVersion: 4,
+  majorVersion: MAJOR_VERSION,
   releaseEnvironment: "production",
   releaseBranches: {
     v3: {
