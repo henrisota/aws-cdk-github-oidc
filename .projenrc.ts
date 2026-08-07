@@ -39,7 +39,7 @@ const project = new AlmaCdkConstructLibrary({
   },
   pnpmSettings: {
     trustPolicyExclude: ["jsii@5.9.35"],
-    allowBuilds: {"lefthook": true, "esbuild": true},
+    allowBuilds: { lefthook: true, esbuild: true },
   },
   codeCov: true,
 });
@@ -84,14 +84,14 @@ gitleaksWorkflow.addJobs({
     steps: [
       {
         name: "Checkout",
-        uses: "actions/checkout@v5",
+        uses: "actions/checkout@v7.0.1",
         with: {
           fetchDepth: 0,
         },
       },
       {
         name: "Run gitleaks",
-        uses: "gitleaks/gitleaks-action@v2",
+        uses: "gitleaks/gitleaks-action@v3.0.0",
         env: {
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}",
           GITLEAKS_CONFIG: ".gitleaks.toml",
@@ -122,7 +122,7 @@ codeqlWorkflow.addJobs({
     steps: [
       {
         name: "Checkout",
-        uses: "actions/checkout@v5",
+        uses: "actions/checkout@v7.0.1",
       },
       {
         name: "Initialize CodeQL",
