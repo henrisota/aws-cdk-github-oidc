@@ -1,8 +1,25 @@
 import * as cdk from "aws-cdk-lib";
 import { Template, Match } from "aws-cdk-lib/assertions";
 import * as iam from "aws-cdk-lib/aws-iam";
+import { ArtifactMetadataEntryType } from "aws-cdk-lib/cloud-assembly-schema";
 import { GithubActionsIdentityProvider } from "../src/provider";
 import { GithubActionsRole } from "../src/role";
+
+const ANNOTATION_TYPES: string[] = [
+  ArtifactMetadataEntryType.ERROR,
+  ArtifactMetadataEntryType.WARN,
+  ArtifactMetadataEntryType.INFO,
+];
+
+/**
+ * CDK core attaches other kinds of metadata to construct nodes (such as
+ * `aws:cdk:creationStack`), so narrow it down to just the annotations.
+ */
+function annotationsOf(stack: cdk.Stack) {
+  return stack.node.metadata.filter((entry) =>
+    ANNOTATION_TYPES.includes(entry.type),
+  );
+}
 
 test("Role with defaults", () => {
   const app = new cdk.App();
@@ -169,8 +186,11 @@ test("Role with invalid owner", () => {
     repo: "octo-repo",
   });
 
-  expect(stack.node.metadata).toHaveLength(1);
-  expect(stack.node.metadata[0].data).toBe(
+  const annotations = annotationsOf(stack);
+
+  expect(annotations).toHaveLength(1);
+  expect(annotations[0].type).toBe(ArtifactMetadataEntryType.ERROR);
+  expect(annotations[0].data).toBe(
     'Invalid Github Repository Owner "invalid/@owner--". Must only contain alphanumeric characters or hyphens, cannot have multiple consecutive hyphens, cannot begin or end with a hypen and maximum lenght is 39 characters.',
   );
 });
@@ -189,8 +209,11 @@ test("Role with invalid repo", () => {
     repo: "",
   });
 
-  expect(stack.node.metadata).toHaveLength(1);
-  expect(stack.node.metadata[0].data).toBe(
+  const annotations = annotationsOf(stack);
+
+  expect(annotations).toHaveLength(1);
+  expect(annotations[0].type).toBe(ArtifactMetadataEntryType.ERROR);
+  expect(annotations[0].data).toBe(
     'Invalid Github Repository Name "". May not be empty string.',
   );
 });

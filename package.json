@@ -6,33 +6,34 @@
     "url": "https://github.com/aripalo/aws-cdk-github-oidc.git"
   },
   "scripts": {
-    "build": "pnpm exec projen build",
-    "bump": "pnpm exec projen bump",
-    "clobber": "pnpm exec projen clobber",
-    "compat": "pnpm exec projen compat",
-    "compile": "pnpm exec projen compile",
-    "default": "pnpm exec projen default",
-    "docgen": "pnpm exec projen docgen",
-    "eject": "pnpm exec projen eject",
-    "eslint": "pnpm exec projen eslint",
-    "format": "pnpm exec projen format",
-    "package": "pnpm exec projen package",
-    "package-all": "pnpm exec projen package-all",
-    "package:go": "pnpm exec projen package:go",
-    "package:js": "pnpm exec projen package:js",
-    "package:python": "pnpm exec projen package:python",
-    "post-compile": "pnpm exec projen post-compile",
-    "post-upgrade": "pnpm exec projen post-upgrade",
-    "pre-compile": "pnpm exec projen pre-compile",
-    "release": "pnpm exec projen release",
-    "release:5.x": "pnpm exec projen release:5.x",
-    "release:v3": "pnpm exec projen release:v3",
-    "test": "pnpm exec projen test",
-    "test:update": "pnpm exec projen test:update",
-    "test:watch": "pnpm exec projen test:watch",
-    "unbump": "pnpm exec projen unbump",
-    "upgrade": "pnpm exec projen upgrade",
-    "watch": "pnpm exec projen watch",
+    "build": "projen build",
+    "bump": "projen bump",
+    "bump:releasable-commits": "projen bump:releasable-commits",
+    "clobber": "projen clobber",
+    "compat": "projen compat",
+    "compile": "projen compile",
+    "default": "projen default",
+    "docgen": "projen docgen",
+    "eject": "projen eject",
+    "eslint": "projen eslint",
+    "format": "projen format",
+    "package": "projen package",
+    "package-all": "projen package-all",
+    "package:go": "projen package:go",
+    "package:js": "projen package:js",
+    "package:python": "projen package:python",
+    "post-compile": "projen post-compile",
+    "post-upgrade": "projen post-upgrade",
+    "pre-compile": "projen pre-compile",
+    "release": "projen release",
+    "release:6.x": "projen release:6.x",
+    "release:v3": "projen release:v3",
+    "test": "projen test",
+    "test:update": "projen test:update",
+    "test:watch": "projen test:watch",
+    "unbump": "projen unbump",
+    "upgrade": "projen upgrade",
+    "watch": "projen watch",
     "projen": "pnpm exec projen",
     "integ:test": "node ./run-integ-tests.mjs",
     "prepare": "node -e \"const fs = require('node:fs'); const { spawnSync } = require('node:child_process'); if (process.env.CI || !fs.existsSync('.git')) process.exit(0); const result = spawnSync(process.execPath, ['node_modules/lefthook/bin/index.js', 'install'], { stdio: 'inherit' }); process.exit(result.status ?? 1)\"",
@@ -45,40 +46,40 @@
     "organization": true
   },
   "devDependencies": {
-    "@alma-cdk/construct-library": "0.0.26",
+    "@alma-cdk/construct-library": "2.2.0",
     "@aws-cdk/cloud-assembly-schema": "^48.20.0",
     "@aws-cdk/integ-runner": "2.197.4",
     "@aws-cdk/integ-tests-alpha": "2.220.0-alpha.0",
     "@types/jest": "^30",
-    "@types/node": "^20",
+    "@types/node": "^22",
     "@typescript-eslint/eslint-plugin": "^8",
     "@typescript-eslint/parser": "^8",
-    "aws-cdk-lib": "2.237.0",
+    "aws-cdk-lib": "2.260.0",
     "commit-and-tag-version": "^12",
-    "constructs": "10.3.0",
+    "constructs": "10.7.2",
     "eslint": "^9",
     "eslint-config-prettier": "^10.1.8",
     "eslint-import-resolver-typescript": "^2.7.1",
     "eslint-plugin-import": "^2.28.0",
     "eslint-plugin-prettier": "^5.5.5",
     "jest": "^30",
-    "jest-junit": "^16",
-    "jsii": "~5.9.0",
+    "jest-junit": "^17",
+    "jsii": "~6.0.7",
     "jsii-diff": "^1.86.1",
     "jsii-docgen": "^10.5.0",
     "jsii-pacmak": "^1.86.1",
-    "jsii-rosetta": "~5.9.0",
+    "jsii-rosetta": "~6.0.7",
     "lefthook": "2.1.4",
     "prettier": "^3.8.1",
-    "projen": "^0.99.27",
+    "projen": "^0.101.23",
     "ts-jest": "^29",
     "ts-node": "^10.9.2",
     "tsx": "^4.21.0",
-    "typescript": "^5.9"
+    "typescript": "^6.0.2"
   },
   "peerDependencies": {
-    "aws-cdk-lib": "^v2.237.0",
-    "constructs": "^10.3.0"
+    "aws-cdk-lib": "^2.260.0",
+    "constructs": "^10.7.2"
   },
   "pnpm": {},
   "keywords": [
@@ -93,14 +94,23 @@
     "openid-connect"
   ],
   "engines": {
-    "node": ">= 20 <= 24"
+    "node": ">= 22 <= 26"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "11.19.0",
+      "onFail": "warn"
+    }
   },
   "main": "lib/index.js",
   "license": "Apache-2.0",
+  "stability": "experimental",
   "publishConfig": {
     "access": "public"
   },
   "version": "0.0.0",
+  "packageManager": "pnpm@11.19.0",
   "jest": {
     "coverageProvider": "v8",
     "testMatch": [
@@ -141,13 +151,12 @@
       "^.+\\.[t]sx?$": [
         "ts-jest",
         {
-          "tsconfig": "tsconfig.dev.json"
+          "tsconfig": "test/tsconfig.json"
         }
       ]
     }
   },
   "types": "lib/index.d.ts",
-  "stability": "experimental",
   "jsii": {
     "outdir": "dist",
     "targets": {
@@ -159,10 +168,8 @@
         "moduleName": "github.com/aripalo/aws-cdk-github-oidc-go"
       }
     },
-    "tsc": {
-      "outDir": "lib",
-      "rootDir": "src"
-    }
+    "tsconfig": "tsconfig.json",
+    "validateTsconfig": "strict"
   },
   "//": "~~ Generated by projen. To modify, edit .projenrc.ts and run \"pnpm exec projen\"."
 }

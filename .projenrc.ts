@@ -1,7 +1,7 @@
 import { AlmaCdkConstructLibrary } from "@alma-cdk/construct-library";
 import { cdk, github, YamlFile } from "projen";
 
-const MAJOR_VERSION = 4;
+const MAJOR_VERSION = 5;
 const NEXT_MAJOR_VERSION = MAJOR_VERSION + 1;
 
 const project = new AlmaCdkConstructLibrary({
@@ -39,10 +39,9 @@ const project = new AlmaCdkConstructLibrary({
   },
   pnpmSettings: {
     trustPolicyExclude: ["jsii@5.9.35"],
-    onlyBuiltDependencies: ["lefthook", "esbuild"],
+    allowBuilds: { lefthook: true, esbuild: true },
   },
   codeCov: true,
-  cdkVersion: "v2.237.0", // https://github.com/aws/aws-cdk/releases/tag/v2.237.0 & https://github.com/aws/aws-cdk/commit/09383cbad28336441f0fb405c9d8a190135620dc
 });
 
 project.addDevDeps(
@@ -85,14 +84,14 @@ gitleaksWorkflow.addJobs({
     steps: [
       {
         name: "Checkout",
-        uses: "actions/checkout@v5",
+        uses: "actions/checkout@v7.0.1",
         with: {
           fetchDepth: 0,
         },
       },
       {
         name: "Run gitleaks",
-        uses: "gitleaks/gitleaks-action@v2",
+        uses: "gitleaks/gitleaks-action@v3.0.0",
         env: {
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}",
           GITLEAKS_CONFIG: ".gitleaks.toml",
@@ -123,7 +122,7 @@ codeqlWorkflow.addJobs({
     steps: [
       {
         name: "Checkout",
-        uses: "actions/checkout@v5",
+        uses: "actions/checkout@v7.0.1",
       },
       {
         name: "Initialize CodeQL",

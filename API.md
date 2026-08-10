@@ -59,6 +59,8 @@ optional properties for the provider.
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-cdk-github-oidc.GithubActionsIdentityProvider.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-cdk-github-oidc.GithubActionsIdentityProvider.with">with</a></code> | Applies one or more mixins to this construct. |
+| <code><a href="#aws-cdk-github-oidc.GithubActionsIdentityProvider.applyCrossStackReferenceStrength">applyCrossStackReferenceStrength</a></code> | Override the cross-stack reference strength for this resource. |
 | <code><a href="#aws-cdk-github-oidc.GithubActionsIdentityProvider.applyRemovalPolicy">applyRemovalPolicy</a></code> | Apply the given removal policy to this resource. |
 
 ---
@@ -70,6 +72,47 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="aws-cdk-github-oidc.GithubActionsIdentityProvider.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-cdk-github-oidc.GithubActionsIdentityProvider.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+---
+
+##### `applyCrossStackReferenceStrength` <a name="applyCrossStackReferenceStrength" id="aws-cdk-github-oidc.GithubActionsIdentityProvider.applyCrossStackReferenceStrength"></a>
+
+```typescript
+public applyCrossStackReferenceStrength(strength: ReferenceStrength): void
+```
+
+Override the cross-stack reference strength for this resource.
+
+When set, any cross-stack reference to this resource will use the specified
+mechanism instead of the global default determined by the
+`@aws-cdk/core:defaultCrossStackReferences` context key. This is useful for
+selectively weakening specific references to avoid the "deadly embrace" problem
+without changing the app-wide default.
+
+###### `strength`<sup>Required</sup> <a name="strength" id="aws-cdk-github-oidc.GithubActionsIdentityProvider.applyCrossStackReferenceStrength.parameter.strength"></a>
+
+- *Type:* aws-cdk-lib.ReferenceStrength
+
+The reference strength to use for this resource.
+
+---
 
 ##### `applyRemovalPolicy` <a name="applyRemovalPolicy" id="aws-cdk-github-oidc.GithubActionsIdentityProvider.applyRemovalPolicy"></a>
 
@@ -251,8 +294,8 @@ CDK Construct ID given to the construct.
 | <code><a href="#aws-cdk-github-oidc.GithubActionsIdentityProvider.property.oidcProviderIssuer">oidcProviderIssuer</a></code> | <code>string</code> | The issuer for the Native OIDC Provider. |
 | <code><a href="#aws-cdk-github-oidc.GithubActionsIdentityProvider.property.oidcProviderRef">oidcProviderRef</a></code> | <code>aws-cdk-lib.interfaces.aws_iam.OIDCProviderReference</code> | A reference to a OIDCProvider resource. |
 | <code><a href="#aws-cdk-github-oidc.GithubActionsIdentityProvider.property.oidcProviderThumbprints">oidcProviderThumbprints</a></code> | <code>string</code> | The thumbprints configured for this provider. |
-| <code><a href="#aws-cdk-github-oidc.GithubActionsIdentityProvider.property.openIdConnectProviderArn">openIdConnectProviderArn</a></code> | <code>string</code> | The Amazon Resource Name (ARN) of the IAM OpenID Connect provider. |
-| <code><a href="#aws-cdk-github-oidc.GithubActionsIdentityProvider.property.openIdConnectProviderIssuer">openIdConnectProviderIssuer</a></code> | <code>string</code> | The issuer for OIDC Provider. |
+| <code><a href="#aws-cdk-github-oidc.GithubActionsIdentityProvider.property.openIdConnectProviderArn">openIdConnectProviderArn</a></code> | <code>string</code> | Alias for `oidcProviderArn` to maintain backwards compatibility for constructs which accept `iam.IOpenIdConnectProvider`. |
+| <code><a href="#aws-cdk-github-oidc.GithubActionsIdentityProvider.property.openIdConnectProviderIssuer">openIdConnectProviderIssuer</a></code> | <code>string</code> | Alias for `oidcProviderIssuer` to maintain backwards compatibility for constructs which accept `iam.IOpenIdConnectProvider. |
 
 ---
 
@@ -348,9 +391,7 @@ The thumbprints configured for this provider.
 
 ---
 
-##### ~~`openIdConnectProviderArn`~~<sup>Required</sup> <a name="openIdConnectProviderArn" id="aws-cdk-github-oidc.GithubActionsIdentityProvider.property.openIdConnectProviderArn"></a>
-
-- *Deprecated:* Use `oidcProviderArn` instead. This property exists for backward compatibility with existing constructs as migrating between the 2 constructs (OpenIdConnectProvider and OidcProviderNative) is not reasonably feasible as it requires a manual step (cdk import) since the resource type is changing between OpenIdConnectProvider and OidcProviderNative.
+##### `openIdConnectProviderArn`<sup>Required</sup> <a name="openIdConnectProviderArn" id="aws-cdk-github-oidc.GithubActionsIdentityProvider.property.openIdConnectProviderArn"></a>
 
 ```typescript
 public readonly openIdConnectProviderArn: string;
@@ -358,13 +399,13 @@ public readonly openIdConnectProviderArn: string;
 
 - *Type:* string
 
-The Amazon Resource Name (ARN) of the IAM OpenID Connect provider.
+Alias for `oidcProviderArn` to maintain backwards compatibility for constructs which accept `iam.IOpenIdConnectProvider`.
+
+Use `oidcProviderArn` instead. This property exists for backward compatibility with existing constructs as migrating between the 2 constructs (OpenIdConnectProvider and OidcProviderNative) is not reasonably feasible as it requires a manual step (cdk import) since the resource type is changing between OpenIdConnectProvider and OidcProviderNative.
 
 ---
 
-##### ~~`openIdConnectProviderIssuer`~~<sup>Required</sup> <a name="openIdConnectProviderIssuer" id="aws-cdk-github-oidc.GithubActionsIdentityProvider.property.openIdConnectProviderIssuer"></a>
-
-- *Deprecated:* use `oidcProviderIssuer` instead. This property exists for backward compatibility with existing constructs as migrating between the 2 constructs (OpenIdConnectProvider and OidcProviderNative) is not reasonably feasible as it requires a manual step (cdk import) since the resource type is changing between OpenIdConnectProvider and OidcProviderNative.
+##### `openIdConnectProviderIssuer`<sup>Required</sup> <a name="openIdConnectProviderIssuer" id="aws-cdk-github-oidc.GithubActionsIdentityProvider.property.openIdConnectProviderIssuer"></a>
 
 ```typescript
 public readonly openIdConnectProviderIssuer: string;
@@ -372,7 +413,9 @@ public readonly openIdConnectProviderIssuer: string;
 
 - *Type:* string
 
-The issuer for OIDC Provider.
+Alias for `oidcProviderIssuer` to maintain backwards compatibility for constructs which accept `iam.IOpenIdConnectProvider.
+
+Use `oidcProviderIssuer` instead. This property exists for backward compatibility with existing constructs as migrating between the 2 constructs (OpenIdConnectProvider and OidcProviderNative) is not reasonably feasible as it requires a manual step (cdk import) since the resource type is changing between OpenIdConnectProvider and OidcProviderNative.
 
 ---
 
@@ -468,6 +511,8 @@ new GithubActionsRole(scope: Construct, id: string, props: GithubActionsRoleProp
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#aws-cdk-github-oidc.GithubActionsRole.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#aws-cdk-github-oidc.GithubActionsRole.with">with</a></code> | Applies one or more mixins to this construct. |
+| <code><a href="#aws-cdk-github-oidc.GithubActionsRole.applyCrossStackReferenceStrength">applyCrossStackReferenceStrength</a></code> | Override the cross-stack reference strength for this resource. |
 | <code><a href="#aws-cdk-github-oidc.GithubActionsRole.applyRemovalPolicy">applyRemovalPolicy</a></code> | Skip applyRemovalPolicy if role synthesis is prevented by customizeRoles. |
 | <code><a href="#aws-cdk-github-oidc.GithubActionsRole.addManagedPolicy">addManagedPolicy</a></code> | Attaches a managed policy to this role. |
 | <code><a href="#aws-cdk-github-oidc.GithubActionsRole.addToPolicy">addToPolicy</a></code> | Add to the policy of this principal. |
@@ -487,6 +532,47 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="aws-cdk-github-oidc.GithubActionsRole.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="aws-cdk-github-oidc.GithubActionsRole.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+---
+
+##### `applyCrossStackReferenceStrength` <a name="applyCrossStackReferenceStrength" id="aws-cdk-github-oidc.GithubActionsRole.applyCrossStackReferenceStrength"></a>
+
+```typescript
+public applyCrossStackReferenceStrength(strength: ReferenceStrength): void
+```
+
+Override the cross-stack reference strength for this resource.
+
+When set, any cross-stack reference to this resource will use the specified
+mechanism instead of the global default determined by the
+`@aws-cdk/core:defaultCrossStackReferences` context key. This is useful for
+selectively weakening specific references to avoid the "deadly embrace" problem
+without changing the app-wide default.
+
+###### `strength`<sup>Required</sup> <a name="strength" id="aws-cdk-github-oidc.GithubActionsRole.applyCrossStackReferenceStrength.parameter.strength"></a>
+
+- *Type:* aws-cdk-lib.ReferenceStrength
+
+The reference strength to use for this resource.
+
+---
 
 ##### `applyRemovalPolicy` <a name="applyRemovalPolicy" id="aws-cdk-github-oidc.GithubActionsRole.applyRemovalPolicy"></a>
 
@@ -1752,8 +1838,8 @@ Describes a Github OpenID Connect Identity Provider for AWS IAM.
 | <code><a href="#aws-cdk-github-oidc.IGithubActionsIdentityProvider.property.oidcProviderRef">oidcProviderRef</a></code> | <code>aws-cdk-lib.interfaces.aws_iam.OIDCProviderReference</code> | A reference to a OIDCProvider resource. |
 | <code><a href="#aws-cdk-github-oidc.IGithubActionsIdentityProvider.property.oidcProviderArn">oidcProviderArn</a></code> | <code>string</code> | The Amazon Resource Name (ARN) of the IAM OpenID Connect provider. |
 | <code><a href="#aws-cdk-github-oidc.IGithubActionsIdentityProvider.property.oidcProviderIssuer">oidcProviderIssuer</a></code> | <code>string</code> | The issuer for OIDC Provider. |
-| <code><a href="#aws-cdk-github-oidc.IGithubActionsIdentityProvider.property.openIdConnectProviderArn">openIdConnectProviderArn</a></code> | <code>string</code> | The Amazon Resource Name (ARN) of the IAM OpenID Connect provider. |
-| <code><a href="#aws-cdk-github-oidc.IGithubActionsIdentityProvider.property.openIdConnectProviderIssuer">openIdConnectProviderIssuer</a></code> | <code>string</code> | The issuer for OIDC Provider. |
+| <code><a href="#aws-cdk-github-oidc.IGithubActionsIdentityProvider.property.openIdConnectProviderArn">openIdConnectProviderArn</a></code> | <code>string</code> | Alias for `oidcProviderArn` to maintain backwards compatibility for constructs which accept `iam.IOpenIdConnectProvider`. |
+| <code><a href="#aws-cdk-github-oidc.IGithubActionsIdentityProvider.property.openIdConnectProviderIssuer">openIdConnectProviderIssuer</a></code> | <code>string</code> | Alias for `oidcProviderIssuer` to maintain backwards compatibility for constructs which accept `iam.IOpenIdConnectProvider. |
 
 ---
 
@@ -1837,9 +1923,7 @@ The issuer for OIDC Provider.
 
 ---
 
-##### ~~`openIdConnectProviderArn`~~<sup>Required</sup> <a name="openIdConnectProviderArn" id="aws-cdk-github-oidc.IGithubActionsIdentityProvider.property.openIdConnectProviderArn"></a>
-
-- *Deprecated:* Use `oidcProviderArn` instead. This property exists for backward compatibility with existing constructs as migrating between the 2 constructs (OpenIdConnectProvider and OidcProviderNative) is not reasonably feasible as it requires a manual step (cdk import) since the resource type is changing between OpenIdConnectProvider and OidcProviderNative.
+##### `openIdConnectProviderArn`<sup>Required</sup> <a name="openIdConnectProviderArn" id="aws-cdk-github-oidc.IGithubActionsIdentityProvider.property.openIdConnectProviderArn"></a>
 
 ```typescript
 public readonly openIdConnectProviderArn: string;
@@ -1847,13 +1931,13 @@ public readonly openIdConnectProviderArn: string;
 
 - *Type:* string
 
-The Amazon Resource Name (ARN) of the IAM OpenID Connect provider.
+Alias for `oidcProviderArn` to maintain backwards compatibility for constructs which accept `iam.IOpenIdConnectProvider`.
+
+Use `oidcProviderArn` instead. This property exists for backward compatibility with existing constructs as migrating between the 2 constructs (OpenIdConnectProvider and OidcProviderNative) is not reasonably feasible as it requires a manual step (cdk import) since the resource type is changing between OpenIdConnectProvider and OidcProviderNative.
 
 ---
 
-##### ~~`openIdConnectProviderIssuer`~~<sup>Required</sup> <a name="openIdConnectProviderIssuer" id="aws-cdk-github-oidc.IGithubActionsIdentityProvider.property.openIdConnectProviderIssuer"></a>
-
-- *Deprecated:* Use `oidcProviderIssuer` instead. This property exists for backward compatibility with existing constructs as migrating between the 2 constructs (OpenIdConnectProvider and OidcProviderNative) is not reasonably feasible as it requires a manual step (cdk import) since the resource type is changing between OpenIdConnectProvider and OidcProviderNative.
+##### `openIdConnectProviderIssuer`<sup>Required</sup> <a name="openIdConnectProviderIssuer" id="aws-cdk-github-oidc.IGithubActionsIdentityProvider.property.openIdConnectProviderIssuer"></a>
 
 ```typescript
 public readonly openIdConnectProviderIssuer: string;
@@ -1861,7 +1945,9 @@ public readonly openIdConnectProviderIssuer: string;
 
 - *Type:* string
 
-The issuer for OIDC Provider.
+Alias for `oidcProviderIssuer` to maintain backwards compatibility for constructs which accept `iam.IOpenIdConnectProvider.
+
+Use `oidcProviderIssuer` instead. This property exists for backward compatibility with existing constructs as migrating between the 2 constructs (OpenIdConnectProvider and OidcProviderNative) is not reasonably feasible as it requires a manual step (cdk import) since the resource type is changing between OpenIdConnectProvider and OidcProviderNative.
 
 ---
 
