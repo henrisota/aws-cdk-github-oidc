@@ -296,7 +296,7 @@
       "description": "Prepare a release from \"main\" branch",
       "env": {
         "RELEASE": "true",
-        "MAJOR": "4"
+        "MAJOR": "5"
       },
       "steps": [
         {
@@ -316,12 +316,12 @@
         }
       ]
     },
-    "release:5.x": {
-      "name": "release:5.x",
-      "description": "Prepare a release from \"5.x\" branch",
+    "release:6.x": {
+      "name": "release:6.x",
+      "description": "Prepare a release from \"6.x\" branch",
       "env": {
         "RELEASE": "true",
-        "MAJOR": "5",
+        "MAJOR": "6",
         "PRERELEASE": "beta"
       },
       "steps": [

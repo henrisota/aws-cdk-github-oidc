@@ -1,7 +1,7 @@
 import { AlmaCdkConstructLibrary } from "@alma-cdk/construct-library";
 import { cdk, github, YamlFile } from "projen";
 
-const MAJOR_VERSION = 4;
+const MAJOR_VERSION = 5;
 const NEXT_MAJOR_VERSION = MAJOR_VERSION + 1;
 
 const project = new AlmaCdkConstructLibrary({
