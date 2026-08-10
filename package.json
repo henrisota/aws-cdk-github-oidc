@@ -46,7 +46,7 @@
     "organization": true
   },
   "devDependencies": {
-    "@alma-cdk/construct-library": "2.2.0",
+    "@alma-cdk/construct-library": "2.3.0",
     "@aws-cdk/cloud-assembly-schema": "^48.20.0",
     "@aws-cdk/integ-runner": "2.197.4",
     "@aws-cdk/integ-tests-alpha": "2.220.0-alpha.0",
